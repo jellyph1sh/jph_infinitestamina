@@ -5,7 +5,7 @@ local function infiniteStamina()
         threadId = GetIdOfThisThread()
         local plyId = PlayerId()
         while true do
-            SetPlayerStamina(plyId, GetMaxPlayerStamina(plyId))
+            SetPlayerStamina(plyId, GetPlayerMaxStamina(plyId))
             
             Citizen.Wait(1000)
         end
@@ -19,7 +19,7 @@ local function stopInfiniteStamina(thread)
 end
 
 AddEventHandler("onClientResourceStart", function(resourceName)
-    if (resourceName ~= GetCurrentResourceName()) then
+    if (GetCurrentResourceName() ~= resourceName) then
         return
     end
 
@@ -27,7 +27,7 @@ AddEventHandler("onClientResourceStart", function(resourceName)
 end)
 
 AddEventHandler("onClientResourceStop", function(resourceName)
-    if (resourceName ~= GetCurrentResourceName()) then
+    if (GetCurrentResourceName() ~= resourceName) then
         return
     end
 
